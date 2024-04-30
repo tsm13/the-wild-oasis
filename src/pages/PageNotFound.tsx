@@ -12,6 +12,11 @@ const StyledPageNotFound = styled.main`
   padding: 4.8rem;
 `;
 
+// FIX: Add box size
+type BoxSize = {
+  size: string;
+};
+
 const Box = styled.div`
   /* box */
   background-color: var(--color-grey-0);
@@ -36,7 +41,9 @@ function PageNotFound() {
         <Heading as="h1">
           The page you are looking for could not be found 😢
         </Heading>
-        <button onClick={moveBack} size="large">
+        <button onClick={moveBack}>
+          {/* FIX: Add box size*/}
+          {/* <button onClick={moveBack} size="large"> */}
           &larr; Go back
         </button>
       </Box>

@@ -1,15 +1,21 @@
-import styled, { css } from "styled-components";
+import styled, { RuleSet, css } from "styled-components";
 
-export const Button = styled.button`
+type ButtonType = {
+  size: string;
+  variation: string;
+};
+
+export const Button = styled.button<ButtonType>`
   border: none;
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);
 
-  ${(props) => sizes[props.size]}
+  ${(props: any) => sizes[props.size]}
   ${(props) => variations[props.variation]}
 `;
 
-const sizes = {
+// REVIEW:
+const sizes: Record<string, any> = {
   small: css`
     font-size: 1.2rem;
     padding: 0.4rem 0.8rem;
@@ -29,7 +35,8 @@ const sizes = {
   `,
 };
 
-const variations = {
+// FIX:
+const variations: any = {
   primary: css`
     color: var(--color-brand-50);
     background-color: var(--color-brand-600);

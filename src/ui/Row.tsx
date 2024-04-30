@@ -1,6 +1,11 @@
 import styled, { css } from "styled-components";
 
-const Row = styled.div`
+type RowType = {
+  type?: string;
+  children?: JSX.Element | JSX.Element[];
+};
+
+const Row = styled.div<RowType>`
   display: flex;
 
   ${(props) =>
