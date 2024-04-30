@@ -1,4 +1,4 @@
-import styled, { RuleSet, css } from "styled-components";
+import styled, { css } from "styled-components";
 
 type ButtonType = {
   size: string;
@@ -10,7 +10,7 @@ export const Button = styled.button<ButtonType>`
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);
 
-  ${(props: any) => sizes[props.size]}
+  ${(props) => sizes[props.size]}
   ${(props) => variations[props.variation]}
 `;
 
@@ -35,8 +35,8 @@ const sizes: Record<string, any> = {
   `,
 };
 
-// FIX:
-const variations: any = {
+// REVIEW:
+const variations: Record<string, any> = {
   primary: css`
     color: var(--color-brand-50);
     background-color: var(--color-brand-600);
