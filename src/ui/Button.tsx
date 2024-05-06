@@ -1,17 +1,18 @@
 import styled, { css } from "styled-components";
 
-type ButtonType = {
-  size: string;
-  variation: string;
+// REVIEW: this whole file :|
+type Props = {
+  size?: string;
+  variation?: string;
 };
 
-export const Button = styled.button<ButtonType>`
+export const Button = styled.button<Props>`
   border: none;
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);
 
-  ${(props) => sizes[props.size]}
-  ${(props) => variations[props.variation]}
+  ${(props) => sizes[props.size!]}
+  ${(props) => variations[props.variation!]}
 `;
 
 // REVIEW:

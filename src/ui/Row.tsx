@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components";
 
-type RowType = {
-  type?: string;
-  children?: JSX.Element | JSX.Element[];
+type Props = {
+  type?: "horizontal" | "vertical";
+  children?: React.ReactElement | React.ReactElement[];
 };
 
-const Row = styled.div<RowType>`
+const Row = styled.div<Props>`
   display: flex;
 
   ${(props) =>

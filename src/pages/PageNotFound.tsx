@@ -12,11 +12,6 @@ const StyledPageNotFound = styled.main`
   padding: 4.8rem;
 `;
 
-// FIX: Add box size
-type BoxSize = {
-  size: string;
-};
-
 const Box = styled.div`
   /* box */
   background-color: var(--color-grey-0);
@@ -31,6 +26,11 @@ const Box = styled.div`
     margin-bottom: 3.2rem;
   }
 `;
+
+// FIX: Add box size
+type Props = {
+  size: string;
+};
 
 function PageNotFound() {
   const moveBack = useMoveBack();
