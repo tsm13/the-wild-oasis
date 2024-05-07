@@ -1,4 +1,4 @@
-import { CabinInterface } from "../interfaces/cabin-interface";
+import { ICabinForm } from "../interfaces/cabin-interface";
 import supabase, { supabaseUrl } from "./supabase";
 
 export async function getCabins() {
@@ -21,42 +21,45 @@ export async function deleteCabin(id: string) {
   }
 }
 
-export async function createCabin(newCabin: CabinInterface) {
+export async function createCabin(newCabin: ICabinForm) {
   console.log(newCabin);
 
-  // ReplaceAll slashes is to prevent supabase from creating folders if image name has slashes in it
-  const imgName = `${Math.random()}-${newCabin.image.name}`.replaceAll("/", "");
-
-  const imgPath = `${supabaseUrl}/storage/v1/object/public/cabin-images/${imgName}`;
-
-  // Creating cabin:
-  const { data, error } = await supabase
-    .from("cabins")
-    .insert([{ ...newCabin, image: imgPath }])
-    .select();
-
-  if (error) {
-    console.error(error);
-    throw new Error("Cabin could not be deleted.");
-  }
-
-  // Uploading image:
-  const { error: StorageError } = await supabase.storage
-    .from("cabin-images")
-    .upload(imgName, newCabin.image, {
-      // optional settings:
-      cacheControl: "3600",
-      upsert: false,
-    });
-
-  // Deleting the cabin if there was an error while uploading the cabin image
-  if (StorageError) {
-    await supabase.from("cabins").delete().eq("id", newCabin.id);
-    console.error(StorageError);
-    throw new Error(
-      "Cabin was not created due to an image upload error. Please try again."
+  if (newCabin.image instanceof File) {
+    const imgName = `${Math.random()}-${newCabin.image.name}`.replaceAll(
+      "/",
+      ""
     );
-  }
 
-  return data;
+    const imgPath = `${supabaseUrl}/storage/v1/object/public/cabin-images/${imgName}`;
+
+    // Creating cabin:
+    const { data, error } = await supabase
+      .from("cabins")
+      .insert([{ ...newCabin, image: imgPath }])
+      .select();
+
+    if (error) {
+      console.error(error);
+      throw new Error("Cabin could not be deleted.");
+    }
+
+    // Uploading image:
+    const { error: StorageError } = await supabase.storage
+      .from("cabin-images")
+      .upload(imgName, newCabin.image, {
+        // optional settings:
+        cacheControl: "3600",
+        upsert: false,
+      });
+
+    // Deleting the cabin if there was an error while uploading the cabin image
+    if (StorageError) {
+      await supabase.from("cabins").delete().eq("id", newCabin.id);
+      console.error(StorageError);
+      throw new Error(
+        "Cabin was not created due to an image upload error. Please try again."
+      );
+    }
+    return data;
+  }
 }

@@ -5,6 +5,7 @@ import { deleteCabin } from "../../services/apiCabins";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import CreateCabinForm from "./CreateCabinForm";
+import { ICabin } from "../../interfaces/cabin-interface";
 
 const TableRow = styled.div`
   display: grid;
@@ -45,15 +46,8 @@ const Discount = styled.div`
   color: var(--color-green-700);
 `;
 
-export type Props = {
-  cabin: {
-    id: string;
-    name: string;
-    maxCapacity: number;
-    regularPrice: number;
-    discount: number;
-    image: string;
-  };
+type Props = {
+  cabin: ICabin;
 };
 
 function CabinRow({ cabin }: Props) {

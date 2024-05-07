@@ -10,11 +10,19 @@ import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow";
 
 import { createCabin } from "../../services/apiCabins";
+import { ICabin, ICabinForm } from "../../interfaces/cabin-interface";
 
-function CreateCabinForm() {
+type Props = {
+  cabinToEdit?: ICabin;
+};
+
+function CreateCabinForm({ cabinToEdit }: Props) {
+  const { id: editId, ...editedValues } = cabinToEdit || {};
   const queryClient = useQueryClient();
   const { register, handleSubmit, reset, getValues, formState } =
-    useForm<Props>();
+    useForm<ICabinForm>({
+      defaultValues: editId ? editedValues : {},
+    });
   const { errors } = formState;
 
   const { mutate, isPending } = useMutation({
@@ -29,23 +37,11 @@ function CreateCabinForm() {
     onError: (err) => toast.error(err.message),
   });
 
-  type Props = {
-    id: string;
-    name: string;
-    maxCapacity: number;
-    regularPrice: number;
-    discount: number;
-    image: FileList;
-    description: string;
-  };
-
-  type EditProps = {
-    cabinToEdit?: Props;
-  };
-
-  const onSubmit = function (data: Props) {
+  const onSubmit = function (data: ICabinForm) {
     console.log(data);
-    mutate({ ...data, image: data.image[0] });
+
+    if (data.image instanceof FileList)
+      mutate({ ...data, image: data.image[0] });
   };
 
   const onError = function (errors: Object) {
