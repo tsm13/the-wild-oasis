@@ -1,6 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
@@ -9,42 +7,49 @@ import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow";
 
-import { createCabin } from "../../services/apiCabins";
 import { ICabin, ICabinForm } from "../../interfaces/cabin-interface";
+import { useCreateCabin } from "./useCreateCabin";
+import { useUpdateCabin } from "./useUpdateCabin";
 
 type Props = {
   cabinToEdit?: ICabin;
 };
 
 function CreateCabinForm({ cabinToEdit }: Props) {
+  const { isCreating, createCabin } = useCreateCabin();
+  const { isUpdating, updateCabin } = useUpdateCabin();
+
   const { id: editId, ...editedValues } = cabinToEdit || {};
-  const queryClient = useQueryClient();
+  //const isEditSession = Boolean(editId);
   const { register, handleSubmit, reset, getValues, formState } =
     useForm<ICabinForm>({
+      // defaultValues: isEditSession ? editedValues : {},
       defaultValues: editId ? editedValues : {},
     });
   const { errors } = formState;
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: createCabin,
-    onSuccess: () => {
-      toast.success("Cabin added successfully");
-      queryClient.invalidateQueries({
-        queryKey: ["cabins"],
-      });
-      reset();
-    },
-    onError: (err) => toast.error(err.message),
-  });
+  const isWorking = isUpdating || isCreating;
 
   const onSubmit = function (data: ICabinForm) {
-    console.log(data);
-
-    if (data.image instanceof FileList)
-      mutate({ ...data, image: data.image[0] });
+    const image =
+      typeof data.image === "string" ? data.image : (data.image as FileList)[0];
+    if (!editId)
+      createCabin(
+        { ...data, image: image },
+        {
+          onSuccess: () => reset(),
+        }
+      );
+    if (editId)
+      updateCabin(
+        { cabin: { ...data, image: image }, id: editId },
+        {
+          onSuccess: () => reset(),
+        }
+      );
   };
 
-  const onError = function (errors: Object) {
+  const onError = function (_errors: Object) {
     //console.log(errors);
   };
 
@@ -53,7 +58,7 @@ function CreateCabinForm({ cabinToEdit }: Props) {
       <FormRow label="Cabin name" error={errors?.name?.message}>
         <Input
           type="text"
-          disabled={isPending}
+          disabled={isWorking}
           id="name"
           {...register("name", { required: "This field is required" })}
         />
@@ -62,7 +67,7 @@ function CreateCabinForm({ cabinToEdit }: Props) {
       <FormRow label="Maximum capacity" error={errors?.name?.message}>
         <Input
           type="number"
-          disabled={isPending}
+          disabled={isWorking}
           id="maxCapacity"
           {...register("maxCapacity", {
             required: "This field is required",
@@ -74,7 +79,7 @@ function CreateCabinForm({ cabinToEdit }: Props) {
       <FormRow label="Regular price" error={errors?.regularPrice?.message}>
         <Input
           type="number"
-          disabled={isPending}
+          disabled={isWorking}
           id="regularPrice"
           {...register("regularPrice", {
             required: "This field is required",
@@ -86,7 +91,7 @@ function CreateCabinForm({ cabinToEdit }: Props) {
       <FormRow label="Discount" error={errors?.discount?.message}>
         <Input
           type="number"
-          disabled={isPending}
+          disabled={isWorking}
           id="discount"
           defaultValue={0}
           {...register("discount", {
@@ -103,7 +108,6 @@ function CreateCabinForm({ cabinToEdit }: Props) {
         error={errors?.description?.message}
       >
         <Textarea
-          disabled={isPending}
           id="description"
           defaultValue=""
           {...register("description", { required: "This field is required" })}
@@ -112,10 +116,12 @@ function CreateCabinForm({ cabinToEdit }: Props) {
 
       <FormRow label="Cabin photo" error={errors?.image?.message}>
         <FileInput
-          disabled={isPending}
+          disabled={isWorking}
           id="image"
           accept="image/*"
-          {...register("image", { required: "This field is required" })}
+          {...register("image", {
+            required: editId ? false : "This field is required",
+          })}
         />
       </FormRow>
 
@@ -124,7 +130,9 @@ function CreateCabinForm({ cabinToEdit }: Props) {
           <Button variation="secondary" type="reset">
             Cancel
           </Button>
-          <Button disabled={isPending}>Add cabin</Button>
+          <Button disabled={isWorking}>
+            {editId ? "Edit cabin" : "Create new cabin"}
+          </Button>
         </>
       </FormRow>
     </Form>

@@ -1,5 +1,5 @@
 export interface ICabinForm {
-  id: number;
+  id?: number;
   name: string;
   maxCapacity: number;
   regularPrice: number;
@@ -10,6 +10,7 @@ export interface ICabinForm {
 
 export interface ICabin {
   id: string;
+  createdAt: string;
   name: string;
   maxCapacity: number;
   regularPrice: number;
