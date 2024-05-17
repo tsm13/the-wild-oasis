@@ -20,11 +20,11 @@ const Label = styled.span`
   }
 `;
 
-type Props = {
+interface Props {
   icon: string;
   label: string;
   children: React.ReactElement;
-};
+}
 
 function DataItem({ icon, label, children }: Props) {
   return (

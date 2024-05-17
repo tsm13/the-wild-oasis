@@ -28,9 +28,9 @@ const Box = styled.div`
 `;
 
 // FIX: Add box size
-type Props = {
+interface Props {
   size: string;
-};
+}
 
 function PageNotFound() {
   const moveBack = useMoveBack();

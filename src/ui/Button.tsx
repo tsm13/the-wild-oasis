@@ -1,9 +1,8 @@
 import styled, { css } from "styled-components";
 
-// REVIEW: this whole file :|
 type Props = {
-  size?: string;
-  variation?: string;
+  size: "small" | "medium" | "large";
+  variation: "primary" | "secondary" | "danger";
 };
 
 export const Button = styled.button<Props>`
@@ -11,12 +10,11 @@ export const Button = styled.button<Props>`
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);
 
-  ${(props) => sizes[props.size!]}
-  ${(props) => variations[props.variation!]}
+  ${(props) => sizes[props.size]}
+  ${(props) => variations[props.variation]}
 `;
 
-// REVIEW:
-const sizes: Record<string, any> = {
+const sizes = {
   small: css`
     font-size: 1.2rem;
     padding: 0.4rem 0.8rem;
@@ -36,8 +34,7 @@ const sizes: Record<string, any> = {
   `,
 };
 
-// REVIEW:
-const variations: Record<string, any> = {
+const variations = {
   primary: css`
     color: var(--color-brand-50);
     background-color: var(--color-brand-600);

@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
 
-type Props = {
+interface Props {
   type?: "horizontal" | "vertical";
   children?: React.ReactElement | React.ReactElement[];
-};
+}
 
 const Row = styled.div<Props>`
   display: flex;

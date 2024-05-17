@@ -7,15 +7,16 @@ import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow";
 
-import { ICabin, ICabinForm } from "../../interfaces/cabin-interface";
+import { ICabin, ICabinForm } from "./cabin-interface";
 import { useCreateCabin } from "./useCreateCabin";
 import { useUpdateCabin } from "./useUpdateCabin";
 
-type Props = {
+interface Props {
   cabinToEdit?: ICabin;
-};
+  onCloseModal?: () => void;
+}
 
-function CreateCabinForm({ cabinToEdit }: Props) {
+function CreateCabinForm({ cabinToEdit, onCloseModal }: Props) {
   const { isCreating, createCabin } = useCreateCabin();
   const { isUpdating, updateCabin } = useUpdateCabin();
 
@@ -37,14 +38,20 @@ function CreateCabinForm({ cabinToEdit }: Props) {
       createCabin(
         { ...data, image: image },
         {
-          onSuccess: () => reset(),
+          onSuccess: () => {
+            reset();
+            onCloseModal?.();
+          },
         }
       );
     if (editId)
       updateCabin(
         { cabin: { ...data, image: image }, id: editId },
         {
-          onSuccess: () => reset(),
+          onSuccess: () => {
+            reset();
+            onCloseModal?.();
+          },
         }
       );
   };
@@ -54,7 +61,10 @@ function CreateCabinForm({ cabinToEdit }: Props) {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onError)}>
+    <Form
+      onSubmit={handleSubmit(onSubmit, onError)}
+      type={onCloseModal ? "modal" : "regular"}
+    >
       <FormRow label="Cabin name" error={errors?.name?.message}>
         <Input
           type="text"
@@ -127,10 +137,15 @@ function CreateCabinForm({ cabinToEdit }: Props) {
 
       <FormRow>
         <>
-          <Button variation="secondary" type="reset">
+          <Button
+            variation="secondary"
+            size="medium"
+            type="reset"
+            onClick={() => onCloseModal?.()}
+          >
             Cancel
           </Button>
-          <Button disabled={isWorking}>
+          <Button variation="primary" size="medium" disabled={isWorking}>
             {editId ? "Edit cabin" : "Create new cabin"}
           </Button>
         </>

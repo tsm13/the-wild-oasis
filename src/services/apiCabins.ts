@@ -1,4 +1,4 @@
-import { ICabinForm } from "../interfaces/cabin-interface";
+import { ICabinForm } from "../features/cabins/cabin-interface";
 import supabase, { supabaseUrl } from "./supabase";
 
 export async function getCabins() {
@@ -22,8 +22,6 @@ export async function deleteCabin(id: string) {
 }
 
 export async function createCabin(newCabin: ICabinForm) {
-  console.log("CREATE:", newCabin);
-
   const imgPath = await uploadImage(newCabin);
 
   const { data, error } = await supabase
@@ -40,8 +38,6 @@ export async function createCabin(newCabin: ICabinForm) {
 }
 
 export async function updateCabin(cabin: ICabinForm, id: string) {
-  console.log("UPDATE:", cabin, id);
-
   if (!id) return;
 
   const imgPath = await uploadImage(cabin);
@@ -61,6 +57,7 @@ export async function updateCabin(cabin: ICabinForm, id: string) {
 }
 
 async function uploadImage(cabin: ICabinForm) {
+  if (typeof cabin.image === "string") return cabin.image;
   if (cabin.image instanceof File) {
     const imgName = `${Math.random()}-${cabin.image.name}`.replaceAll("/", "");
 

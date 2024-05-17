@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { ICabinForm } from "../../interfaces/cabin-interface";
+import { ICabinForm } from "./cabin-interface";
 import { updateCabin as updateCabinAPI } from "../../services/apiCabins";
 
 export function useUpdateCabin() {
@@ -14,7 +14,6 @@ export function useUpdateCabin() {
       queryClient.invalidateQueries({
         queryKey: ["cabins"],
       });
-      // reset();
     },
     onError: (err) => toast.error(err.message),
   });

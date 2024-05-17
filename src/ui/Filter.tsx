@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
 
 // REVIEW:
-type Props = {
+interface Props {
   active: boolean;
-};
+}
 
 const StyledFilter = styled.div`
   border: 1px solid var(--color-grey-100);

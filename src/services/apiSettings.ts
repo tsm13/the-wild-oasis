@@ -5,13 +5,13 @@ export async function getSettings() {
 
   if (error) {
     console.error(error);
-    throw new Error("Settings could not be loaded");
+    throw new Error("Settings could not be loaded.");
   }
   return data;
 }
 
 // We expect a newSetting object that looks like {setting: newValue}
-export async function updateSetting(newSetting) {
+export async function updateSettings(newSetting: ISettings) {
   const { data, error } = await supabase
     .from("settings")
     .update(newSetting)
@@ -21,7 +21,7 @@ export async function updateSetting(newSetting) {
 
   if (error) {
     console.error(error);
-    throw new Error("Settings could not be updated");
+    throw new Error("Settings could not be updated.");
   }
   return data;
 }

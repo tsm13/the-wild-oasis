@@ -36,11 +36,11 @@ const Error = styled.span`
   color: var(--color-red-700);
 `;
 
-type Props = {
+interface Props {
   label?: string;
   error?: string;
   children: React.ReactElement;
-};
+}
 
 export default function FormRow({ label, error, children }: Props) {
   return (
