@@ -26,8 +26,4 @@ const Form = styled.form<Props>`
   font-size: 1.4rem;
 `;
 
-// Form.defaultProps = {
-//   type: "regular",
-// };
-
 export default Form;

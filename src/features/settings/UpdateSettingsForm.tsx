@@ -1,3 +1,4 @@
+import { FocusEvent } from "react";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
@@ -18,7 +19,7 @@ function UpdateSettingsForm() {
 
   const { isUpdating, updateSettings } = useUpdateSettings();
 
-  function handleUpdate(e: React.FocusEvent<HTMLInputElement>, field: string) {
+  function handleUpdate(e: FocusEvent<HTMLInputElement>, field: string) {
     const { value } = e.target;
 
     if (!value) return;
@@ -29,7 +30,7 @@ function UpdateSettingsForm() {
   if (isPending) return <Spinner />;
 
   return (
-    <Form>
+    <Form type="regular">
       <FormRow label="Minimum nights/booking">
         <Input
           type="number"
