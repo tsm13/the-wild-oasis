@@ -1,7 +1,49 @@
 import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
 
-export async function getBooking(id) {
+interface GetBookingsParams {
+  filter: {
+    field: string;
+    value: string;
+    method?: "lte" | "gte";
+  } | null;
+
+  sortBy: {
+    field: string;
+    direction: string;
+  };
+}
+
+export async function getBookings({ filter, sortBy }: GetBookingsParams) {
+  let query = supabase
+    .from("bookings")
+    .select(
+      "id, createdAt, startDate, endDate, numNights, numGuests, status, totalPrice, cabins(name), guests(fullName, email)"
+    );
+
+  // Filtering the query:
+  if (filter) query = query[filter.method || "eq"](filter.field, filter.value);
+
+  if (sortBy)
+    query = query.order(sortBy.field, {
+      ascending: sortBy.direction === "asc",
+    });
+
+  const { data, error } = await query;
+
+  if (error) {
+    console.error(error);
+    throw new Error("Bookings could not be loaded.");
+  }
+
+  // Sorting:
+
+  // REVIEW:
+  // return data;
+  return data as any;
+}
+
+export async function getBooking(id: string) {
   const { data, error } = await supabase
     .from("bookings")
     .select("*, cabins(*), guests(*)")
@@ -20,9 +62,9 @@ export async function getBooking(id) {
 export async function getBookingsAfterDate(date) {
   const { data, error } = await supabase
     .from("bookings")
-    .select("created_at, totalPrice, extrasPrice")
-    .gte("created_at", date)
-    .lte("created_at", getToday({ end: true }));
+    .select("createdAt, totalPrice, extrasPrice")
+    .gte("createdAt", date)
+    .lte("createdAt", getToday({ end: true }));
 
   if (error) {
     console.error(error);
@@ -57,7 +99,7 @@ export async function getStaysTodayActivity() {
     .or(
       `and(status.eq.unconfirmed,startDate.eq.${getToday()}),and(status.eq.checked-in,endDate.eq.${getToday()})`
     )
-    .order("created_at");
+    .order("createdAt");
 
   // Equivalent to this. But by querying this, we only download the data we actually need, otherwise we would need ALL bookings ever created
   // (stay.status === 'unconfirmed' && isToday(new Date(stay.startDate))) ||

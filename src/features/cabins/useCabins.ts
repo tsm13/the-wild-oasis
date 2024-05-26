@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getCabins } from "../../services/apiCabins";
-import { ICabin } from "./cabin-interface";
+import { ICabin } from "./interface";
 
 export function useCabins() {
   const {

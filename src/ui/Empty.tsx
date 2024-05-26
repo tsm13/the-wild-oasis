@@ -1,9 +1,9 @@
-type Props = {
-  resource: React.ReactElement;
-};
+interface Props {
+  resourceName: string;
+}
 
-function Empty({ resource }: Props) {
-  return <p>No {resource} could be found.</p>;
+function Empty({ resourceName }: Props) {
+  return <p>No {resourceName} could be found.</p>;
 }
 
 export default Empty;

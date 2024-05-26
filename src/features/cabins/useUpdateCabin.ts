@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { ICabinForm } from "./cabin-interface";
+import { ICabinForm } from "./interface";
 import { updateCabin as updateCabinAPI } from "../../services/apiCabins";
 
 export function useUpdateCabin() {

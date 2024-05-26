@@ -1,4 +1,4 @@
-import { ICabinForm } from "../features/cabins/cabin-interface";
+import { ICabinForm } from "../features/cabins/interface";
 import supabase, { supabaseUrl } from "./supabase";
 
 export async function getCabins() {

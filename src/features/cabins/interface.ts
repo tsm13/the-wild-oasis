@@ -18,3 +18,5 @@ export interface ICabin {
   image: string;
   description: string;
 }
+
+export type ICabinKeys = keyof ICabin;

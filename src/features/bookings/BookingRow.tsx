@@ -6,6 +6,7 @@ import Table from "../../ui/Table";
 
 import { formatCurrency } from "../../utils/helpers";
 import { formatDistanceFromNow } from "../../utils/helpers";
+import { IBooking } from "./interface";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -34,20 +35,21 @@ const Amount = styled.div`
   font-weight: 500;
 `;
 
+interface Props {
+  booking: IBooking;
+}
+
 function BookingRow({
   booking: {
-    id: bookingId,
-    created_at,
     startDate,
     endDate,
     numNights,
-    numGuests,
     totalPrice,
     status,
     guests: { fullName: guestName, email },
     cabins: { name: cabinName },
   },
-}) {
+}: Props) {
   const statusToTagName = {
     unconfirmed: "blue",
     "checked-in": "green",

@@ -74,11 +74,11 @@ interface TableProps {
 }
 
 interface TableHeaderProps {
-  children: ReactElement;
+  children: ReactElement | ReactElement[];
 }
 
 interface TableRowProps {
-  children: ReactElement;
+  children: ReactElement | ReactElement[];
 }
 
 interface TableBodyProps<T> {
