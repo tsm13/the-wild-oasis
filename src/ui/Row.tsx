@@ -23,6 +23,7 @@ const Row = styled.div<Props>`
     `}
 `;
 
+// REVIEW:
 Row.defaultProps = {
   type: "vertical",
 };

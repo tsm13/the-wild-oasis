@@ -11,6 +11,7 @@ import DataItem from "../../ui/DataItem";
 import { Flag } from "../../ui/Flag";
 
 import { formatDistanceFromNow, formatCurrency } from "../../utils/helpers";
+import { IBookingDetails } from "./interface";
 
 const StyledBookingDataBox = styled.section`
   /* Box */
@@ -105,8 +106,12 @@ const Footer = styled.footer`
   text-align: right;
 `;
 
-// A purely presentational component
-function BookingDataBox({ booking }) {
+interface Props {
+  booking: IBookingDetails;
+}
+
+// Presentational component
+function BookingDataBox({ booking }: Props) {
   const {
     createdAt,
     startDate,
@@ -119,7 +124,13 @@ function BookingDataBox({ booking }) {
     hasBreakfast,
     observations,
     isPaid,
-    guests: { fullName: guestName, email, country, countryFlag, nationalID },
+    guests: {
+      fullName: guestName,
+      email,
+      nationality,
+      countryFlag,
+      nationalID,
+    },
     cabins: { name: cabinName },
   } = booking;
 
@@ -144,9 +155,11 @@ function BookingDataBox({ booking }) {
 
       <Section>
         <Guest>
-          {countryFlag && <Flag src={countryFlag} alt={`Flag of ${country}`} />}
+          {countryFlag && (
+            <Flag src={countryFlag} alt={`Flag of ${nationality}`} />
+          )}
           <p>
-            {guestName} {numGuests > 1 ? `+ ${numGuests - 1} guests` : ""}
+            {guestName} {numNights > 1 ? `+ ${numGuests - 1} guests` : ""}
           </p>
           <span>&bull;</span>
           <p>{email}</p>

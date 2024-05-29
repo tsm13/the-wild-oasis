@@ -50,6 +50,7 @@ function Filter({ filterField, options }: FilterProps) {
 
   function handleClick(value: string) {
     searchParams.set(filterField, value);
+    searchParams.delete("page");
     setSearchParams(searchParams);
   }
 

@@ -43,7 +43,7 @@ function ConfirmDelete({
 
       <div>
         <Button
-          variation="secondary"
+          $variation="secondary"
           size="medium"
           disabled={disabled}
           onClick={onCloseModal}
@@ -51,7 +51,7 @@ function ConfirmDelete({
           Cancel
         </Button>
         <Button
-          variation="danger"
+          $variation="danger"
           size="medium"
           disabled={disabled}
           onClick={onConfirm}

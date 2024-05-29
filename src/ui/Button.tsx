@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 type Props = {
   size: "small" | "medium" | "large";
-  variation: "primary" | "secondary" | "danger";
+  $variation: "primary" | "secondary" | "danger";
 };
 
 export const Button = styled.button<Props>`
@@ -11,7 +11,7 @@ export const Button = styled.button<Props>`
   box-shadow: var(--shadow-sm);
 
   ${(props) => sizes[props.size]}
-  ${(props) => variations[props.variation]}
+  ${(props) => variations[props.$variation]}
 `;
 
 const sizes = {
@@ -63,7 +63,7 @@ const variations = {
 };
 
 Button.defaultProps = {
-  variation: "primary",
+  $variation: "primary",
   size: "medium",
 };
 

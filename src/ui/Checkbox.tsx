@@ -1,3 +1,4 @@
+import { ReactElement } from "react";
 import styled from "styled-components";
 
 const StyledCheckbox = styled.div`
@@ -30,7 +31,7 @@ interface Props {
   onChange: () => void;
   disabled: boolean;
   id: string;
-  children: React.ReactElement;
+  children: ReactElement;
 }
 
 function Checkbox({

@@ -138,14 +138,14 @@ function CreateCabinForm({ cabinToEdit, onCloseModal }: Props) {
       <FormRow>
         <>
           <Button
-            variation="secondary"
+            $variation="secondary"
             size="medium"
             type="reset"
             onClick={() => onCloseModal?.()}
           >
             Cancel
           </Button>
-          <Button variation="primary" size="medium" disabled={isWorking}>
+          <Button $variation="primary" size="medium" disabled={isWorking}>
             {editId ? "Edit cabin" : "Create new cabin"}
           </Button>
         </>
