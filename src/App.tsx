@@ -15,6 +15,7 @@ import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./ui/AppLayout";
 import Booking from "./pages/Booking";
 import Checkin from "./pages/Checkin";
+import LoginGuard from "./guards/LoginGuard";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,7 +33,13 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
-          <Route element={<AppLayout />}>
+          <Route
+            element={
+              <LoginGuard>
+                <AppLayout />
+              </LoginGuard>
+            }
+          >
             <Route path="dashboard" element={<Dashboard />}></Route>
             <Route index element={<Navigate replace to="dashboard" />} />
             <Route path="account" element={<Account />}></Route>

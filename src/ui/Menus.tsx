@@ -80,12 +80,12 @@ const StyledButton = styled.button`
 `;
 
 interface IMenusContext {
-  openId: string;
+  openId: number | null;
   position: {
     x: number;
     y: number;
   };
-  open: (id: string) => void;
+  open: (id: number) => void;
   close: () => void;
   setPosition: (position: { x: number; y: number }) => void;
 }
@@ -95,7 +95,7 @@ interface Props {
 }
 
 interface ListProps {
-  id: string;
+  id: number;
   children: ReactElement | ReactElement[];
 }
 
@@ -108,9 +108,9 @@ interface ButtonProps {
 const MenusContext = createContext<IMenusContext>({} as IMenusContext);
 
 function Menus({ children }: Props) {
-  const [openId, setOpenId] = useState("");
+  const [openId, setOpenId] = useState<number | null>(null);
   const [position, setPosition] = useState({} as { x: number; y: number });
-  const close = () => setOpenId("");
+  const close = () => setOpenId(null);
   const open = setOpenId;
 
   return (
@@ -122,7 +122,7 @@ function Menus({ children }: Props) {
   );
 }
 
-function Toggle({ id }: { id: string }) {
+function Toggle({ id }: { id: number }) {
   const { openId, close, open, setPosition } = useContext(MenusContext);
 
   function handleClick(e: MouseEvent<HTMLButtonElement>) {
@@ -136,7 +136,7 @@ function Toggle({ id }: { id: string }) {
         y: rect.y + rect.height + 8,
       });
     }
-    openId === "" || openId !== id ? open(id) : close();
+    !openId || openId !== id ? open(id) : close();
   }
 
   return (

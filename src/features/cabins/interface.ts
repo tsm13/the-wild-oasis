@@ -9,7 +9,7 @@ export interface ICabinForm {
 }
 
 export interface ICabin {
-  id: string;
+  id: number;
   createdAt: string;
   name: string;
   maxCapacity: number;

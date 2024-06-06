@@ -12,8 +12,8 @@ export async function getCabins() {
   return data;
 }
 
-export async function deleteCabin(id: string) {
-  const { error } = await supabase.from("cabins").delete().eq("id", id);
+export async function deleteCabin(cabinId: number) {
+  const { error } = await supabase.from("cabins").delete().eq("id", cabinId);
 
   if (error) {
     console.error(error);
@@ -37,15 +37,15 @@ export async function createCabin(newCabin: ICabinForm) {
   return data;
 }
 
-export async function updateCabin(cabin: ICabinForm, id: string) {
-  if (!id) return;
+export async function updateCabin(cabin: ICabinForm, cabinId: number) {
+  if (!cabinId) return;
 
   const imgPath = await uploadImage(cabin);
 
   const { data, error } = await supabase
     .from("cabins")
     .update({ ...cabin, image: imgPath })
-    .eq("id", id)
+    .eq("id", cabinId)
     .select();
 
   if (error) {

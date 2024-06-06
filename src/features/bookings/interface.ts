@@ -1,5 +1,5 @@
 export interface IBooking {
-  id: string;
+  id: number;
   createdAt: string;
   startDate: string;
   endDate: string;

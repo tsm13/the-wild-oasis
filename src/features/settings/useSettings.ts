@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getSettings } from "../../services/apiSettings";
+import { ISettings } from "./interface";
 
 export function useSettings() {
   const {

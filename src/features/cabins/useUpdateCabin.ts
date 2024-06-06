@@ -7,7 +7,7 @@ export function useUpdateCabin() {
   const queryClient = useQueryClient();
 
   const { mutate: updateCabin, isPending: isUpdating } = useMutation({
-    mutationFn: ({ cabin, id }: { cabin: ICabinForm; id: string }) =>
+    mutationFn: ({ cabin, id }: { cabin: ICabinForm; id: number }) =>
       updateCabinAPI(cabin, id),
     onSuccess: () => {
       toast.success("Cabin added successfully");
