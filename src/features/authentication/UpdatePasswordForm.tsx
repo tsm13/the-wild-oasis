@@ -5,14 +5,16 @@ import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 
 import { useUpdatePassword } from "./useUpdatePassword";
+import { IUpdatePassword } from "./interface";
 
 function UpdatePasswordForm() {
-  const { register, handleSubmit, formState, getValues, reset } = useForm();
+  const { register, handleSubmit, formState, getValues, reset } =
+    useForm<IUpdatePassword>();
   const { errors } = formState;
 
   const { updatePassword, isUpdating } = useUpdatePassword();
 
-  function onSubmit(password: string) {
+  function onSubmit(password: IUpdatePassword) {
     updatePassword(password, { onSuccess: () => reset });
   }
 
@@ -20,7 +22,7 @@ function UpdatePasswordForm() {
     <Form type="regular" onSubmit={handleSubmit(onSubmit)}>
       <FormRow
         label="New password (min 8 characters)"
-        error={errors?.password?.message}
+        error={errors.password?.message}
       >
         <Input
           type="password"
@@ -39,7 +41,7 @@ function UpdatePasswordForm() {
 
       <FormRow
         label="Confirm new password"
-        error={errors?.passwordConfirm?.message}
+        error={errors.passwordConfirm?.message}
       >
         <Input
           type="password"
@@ -54,15 +56,19 @@ function UpdatePasswordForm() {
         />
       </FormRow>
       <FormRow>
-        <Button
-          onClick={reset}
-          type="reset"
-          $variation="secondary"
-          size="medium"
-        >
-          Cancel
-        </Button>
-        <Button disabled={isUpdating}>Update password</Button>
+        <>
+          <Button
+            onClick={() => reset()}
+            type="reset"
+            $variation="secondary"
+            size="medium"
+          >
+            Cancel
+          </Button>
+          <Button $variation="primary" size="medium" disabled={isUpdating}>
+            Update password
+          </Button>
+        </>
       </FormRow>
     </Form>
   );
