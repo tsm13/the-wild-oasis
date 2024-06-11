@@ -1,5 +1,4 @@
 import {
-  HiCurrencyDollar,
   HiOutlineBanknotes,
   HiOutlineBriefcase,
   HiOutlineCalendarDays,
@@ -22,15 +21,17 @@ export default function Stats({
   numDays,
   cabinCount,
 }: Props) {
-  const numBookings = bookings?.length || "Error";
-  const sales =
-    bookings?.reduce((acc, curr) => acc + curr.totalPrice, 0) || "Error";
+  const numBookings = bookings?.length || 0;
+
+  const sales = bookings?.reduce((acc, curr) => acc + curr.totalPrice, 0) || 0;
+
   const checkins = confirmedStays?.length || 0;
-  const occupation = confirmedStays?.reduce(
-    (acc, curr) => acc + curr.numNights,
-    0
-  );
-  // num checked in nights / all available nights (num days * num cabins)
+
+  const occupation = confirmedStays
+    ? confirmedStays.reduce((acc, curr) => acc + curr.numNights, 0) /
+      (numDays * cabinCount)
+    : 0;
+  // NOTE: occupation: num checked in nights / all available nights (nights = num days * num cabins)
 
   return (
     <>
@@ -56,7 +57,7 @@ export default function Stats({
         title="Occupancy rate"
         color="yellow"
         icon={<HiOutlineChartBar />}
-        value={occupation}
+        value={Math.round(occupation * 100) + "%"}
       />
     </>
   );

@@ -21,3 +21,9 @@ export interface IDashboardStay {
     fullName: string;
   };
 }
+
+export interface IStartDate {
+  duration: string;
+  value: number;
+  color: string;
+}
