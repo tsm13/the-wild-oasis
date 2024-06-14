@@ -1,6 +1,11 @@
 _AppReview.tsx
-_index.css
+_UploaderAll.jsx
 *-v1.*
+
+# Dummy data
+fakeData.js
+data-guests.js
+data-cabins.js
 
 # Logs
 logs

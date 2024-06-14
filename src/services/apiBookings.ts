@@ -42,7 +42,7 @@ export async function getBookings({ filter, sortBy, page }: GetBookingsParams) {
 
   if (error) {
     console.error(error);
-    throw new Error("Failed to load bookings.");
+    throw new Error("Failed to load bookings");
   }
 
   // Sorting:
@@ -62,7 +62,7 @@ export async function getBooking(id: number) {
 
   if (error) {
     console.error(error);
-    throw new Error("Booking not found.");
+    throw new Error("Booking not found");
   }
 
   return data;
@@ -77,12 +77,13 @@ export async function getBookingsAfterDate(date: string) {
 
   if (error) {
     console.error(error);
-    throw new Error("Failed to load bookings.");
+    throw new Error("Failed to load bookings");
   }
 
   return data;
 }
 
+// REVIEW: filter for confirmed stays?
 export async function getStaysAfterDate(date: string) {
   const { data, error } = await supabase
     .from("bookings")
@@ -92,13 +93,13 @@ export async function getStaysAfterDate(date: string) {
 
   if (error) {
     console.error(error);
-    throw new Error("Failed to load bookings.");
+    throw new Error("Failed to load bookings");
   }
 
   return data;
 }
 
-// Activity means that there is a check in or a check out today
+// Activity = check in/out today
 export async function getStaysTodayActivity() {
   const { data, error } = await supabase
     .from("bookings")
@@ -108,13 +109,13 @@ export async function getStaysTodayActivity() {
     )
     .order("createdAt");
 
-  // Equivalent to this. But by querying this, we only download the data we actually need, otherwise we would need ALL bookings ever created
+  // Equivalent to this:
   // (stay.status === 'unconfirmed' && isToday(new Date(stay.startDate))) ||
   // (stay.status === 'checked-in' && isToday(new Date(stay.endDate)))
 
   if (error) {
     console.error(error);
-    throw new Error("Bookings could not get loaded");
+    throw new Error("Failed to load bookings.");
   }
   return data;
 }
@@ -129,7 +130,7 @@ export async function updateBooking(id: number, obj: object) {
 
   if (error) {
     console.error(error);
-    throw new Error("Booking could not be updated");
+    throw new Error("Failed to update booking");
   }
   return data;
 }
@@ -140,7 +141,7 @@ export async function deleteBooking(id: number) {
 
   if (error) {
     console.error(error);
-    throw new Error("Booking could not be deleted");
+    throw new Error("Failed to delete booking");
   }
   return data;
 }

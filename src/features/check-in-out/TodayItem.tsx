@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+import { IBookingDetails } from "../bookings/interface";
+import Tag from "../../ui/Tag";
+import { Flag } from "../../ui/Flag";
+import Button from "../../ui/Button";
+import { Link } from "react-router-dom";
+import CheckoutButton from "./CheckoutButton";
+
 const StyledTodayItem = styled.li`
   display: grid;
   grid-template-columns: 9rem 2rem 1fr 7rem 9rem;
@@ -18,3 +25,33 @@ const StyledTodayItem = styled.li`
 const Guest = styled.div`
   font-weight: 500;
 `;
+
+interface Props {
+  activity: IBookingDetails;
+}
+
+export default function TodayItem({ activity }: Props) {
+  const { id, status, guests, numNights } = activity;
+
+  return (
+    <StyledTodayItem>
+      {status === "unconfirmed" && <Tag type="green">Arriving</Tag>}
+      {status === "checked-in" && <Tag type="blue">Departing</Tag>}
+      <Flag src={guests.countryFlag} alt={`Flag of ${guests.nationality}`} />
+      <Guest>{guests.fullName}</Guest>
+      <div>{numNights} nights</div>
+
+      {status === "unconfirmed" && (
+        <Button
+          size="small"
+          $variation="primary"
+          as={Link}
+          to={`/checkin/${id}`}
+        >
+          Check in
+        </Button>
+      )}
+      {status === "checked-in" && <CheckoutButton bookingId={id} />}
+    </StyledTodayItem>
+  );
+}

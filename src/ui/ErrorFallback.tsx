@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import Heading from "./Heading";
+import GlobalStyles from "../styles/GlobalStyles";
+import Button from "./Button";
 
 const StyledErrorFallback = styled.main`
   height: 100vh;
@@ -10,7 +13,6 @@ const StyledErrorFallback = styled.main`
 `;
 
 const Box = styled.div`
-  /* Box */
   background-color: var(--color-grey-0);
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
@@ -29,3 +31,29 @@ const Box = styled.div`
     color: var(--color-grey-500);
   }
 `;
+
+interface Props {
+  error: Error;
+  resetErrorBoundary: () => void;
+}
+
+export default function ErrorFallback({ error, resetErrorBoundary }: Props) {
+  return (
+    <>
+      <GlobalStyles />
+      <StyledErrorFallback>
+        <Box>
+          <Heading as="h1">An unexpected error occurred.</Heading>
+          <p>{error.message}</p>
+          <Button
+            $variation="primary"
+            size="medium"
+            onClick={resetErrorBoundary}
+          >
+            Return to home
+          </Button>
+        </Box>
+      </StyledErrorFallback>
+    </>
+  );
+}

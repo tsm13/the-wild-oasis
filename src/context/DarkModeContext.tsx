@@ -13,7 +13,14 @@ interface Props {
 const DarkModeContext = createContext<IDarkMode | undefined>(undefined);
 
 function DarkModeProvider({ children }: Props) {
-  const [isDarkMode, setIsDarkMode] = useLocalStorageState(false, "isDarkMode");
+  const matchMediaDark = window.matchMedia(
+    "(prefers-color-scheme: dark)"
+  ).matches;
+
+  const [isDarkMode, setIsDarkMode] = useLocalStorageState(
+    matchMediaDark,
+    "isDarkMode"
+  );
 
   const toggleDarkMode = () => {
     setIsDarkMode((darkMode) => !darkMode);
