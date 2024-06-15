@@ -5,7 +5,7 @@ import Button from "../ui/Button";
 import { subtractDates } from "../utils/helpers";
 
 import { bookings } from "./data-bookings";
-import { cabins } from "./data-cabins";
+import { cabins } from "../mock/data-cabins";
 
 async function deleteBookings() {
   const { error } = await supabase.from("bookings").delete().gt("id", 0);
@@ -82,7 +82,7 @@ function Uploader() {
     <div
       style={{
         marginTop: "auto",
-        backgroundColor: "#e0e7ff",
+        border: "1px solid var(--color-grey-100)",
         padding: "8px",
         borderRadius: "5px",
         textAlign: "center",
@@ -92,10 +92,12 @@ function Uploader() {
       }}
     >
       <h3>DEMO DATA</h3>
+      <p style={{ fontSize: "1rem" }}>
+        Click if dashboard is empty, then refresh the dashboard to see the data!
+      </p>
       <Button onClick={uploadBookings} disabled={isLoading}>
         Upload bookings
       </Button>
-      <p>Click if dashboard is empty!</p>
     </div>
   );
 }
