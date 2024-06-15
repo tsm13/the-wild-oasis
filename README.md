@@ -17,7 +17,7 @@
 
 ## Technical concepts + external libraries used
 
-- Typescript: Adaptation made by me (my very first one!) and not by the instructor, so there will likely be lots of mistakes! 😅
+- Typescript: JS to TS adaptation made by me (my very first one!), so there will likely be lots of mistakes! 😅
 - Compound Components
 - Custom React Hooks
 - Error Boundary
@@ -37,11 +37,15 @@
 🇬🇧
 A pre-created user is available for demo purposes. The "Demo Data" button uploads dummy booking data to the database, which will be fetched by the dashboard after it's reloaded.
 
+If you face issues logging in with an "error while fetching resources" message, it might be that the database was paused due to inactivity. If that happens, the app will become unusable until I reactivate the database.
+
 **Important**: While this is just a sample project built for learning purposes, I humbly ask that you don't intentionally misuse any data deletion/edition functionalities, as not to mess up the database. 🙏
 
 ---
 
 🇧🇷
 Usuário de teste já disponível para fins de demonstração. O botão "Demo Data" faz upload de dados mockados para a database, os quais serão atualizados na dashboard após um refresh ou troca de página.
+
+Se o site retornar a mensagem "error while fetching resources" durante tentativa de login, pode ser que a database tenha sido pausada por inatividade, não sendo possível acessar os dados a não ser que eu a reative.
 
 **Importante**: Apesar deste projeto ser apenas para fins de aprendizado, peço humildemente que não faça mal uso intencional das funcionalidades de edição/exclusão de dados, pois ambos se refletem na database automaticamente. 🙏

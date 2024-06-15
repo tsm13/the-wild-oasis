@@ -1,6 +1,7 @@
 _AppReview.tsx
-_index.css
+index.css
 *-v1.*
+data/cabins
 
 # Mock data
 mock/
