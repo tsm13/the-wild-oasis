@@ -93,7 +93,8 @@ function Uploader() {
     >
       <h3>DEMO DATA</h3>
       <p style={{ fontSize: "1rem" }}>
-        Click if dashboard is empty, then refresh the dashboard to see the data!
+        Click the button below if dashboard is empty, then refresh the dashboard
+        to see the updated data!
       </p>
       <Button onClick={uploadBookings} disabled={isLoading}>
         Upload bookings

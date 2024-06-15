@@ -30,7 +30,7 @@
 
 ## Live Demo
 
-[Here on Vercel](https://the-wild-oasis-tsm13.vercel.app)!
+[Here on Netlify](https://the-wild-oasis-tsm13.netlify.app)!
 
 ### **Notes (please read!)**
 
