@@ -32,7 +32,7 @@
 
 [Here on netlify](https://the-wild-oasis-tsm13.netlify.app)!
 
-Notes **(please read!)**
+### **Notes (please read!)**
 
 🇬🇧
 A pre-created user is available for demo purposes. The "Demo Data" button uploads dummy booking data to the database, which will be fetched by the dashboard after it's reloaded.

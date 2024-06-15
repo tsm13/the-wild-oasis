@@ -5,7 +5,7 @@ import Button from "../ui/Button";
 import { subtractDates } from "../utils/helpers";
 
 import { bookings } from "./data-bookings";
-import { cabins } from "../mock/data-cabins";
+import { cabins } from "./data-cabins";
 
 async function deleteBookings() {
   const { error } = await supabase.from("bookings").delete().gt("id", 0);
