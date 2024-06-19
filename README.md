@@ -21,16 +21,17 @@
 
 ## Tools and technical concepts
 
-- Typescript
-- Compound Components: For Modals
+- Compound Components: For the creation of highly reusable components such as tables and modals
 - Custom React Hooks: For fetching data with React Query
-- Error Boundary
+- Error Boundary (react-error-boundary lib)
 - React Hook Form
-- React Router v5
+- React Router
 - React Query
 - Recharts
 - RESTful APIs
+- Supabase
 - Styled Components
+- Typescript
 
 ### Notes
 

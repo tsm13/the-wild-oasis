@@ -8,7 +8,7 @@ import { ICabin, ICabinKeys } from "./interface";
 import Empty from "../../ui/Empty";
 
 function CabinTable() {
-  const { isLoading, cabins, error } = useCabins();
+  const { isLoading, cabins } = useCabins();
 
   const [searchParams] = useSearchParams();
 

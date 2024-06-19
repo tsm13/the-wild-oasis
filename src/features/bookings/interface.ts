@@ -16,9 +16,6 @@ export interface IBooking {
   };
 }
 
-// REVIEW:
-// https://github.com/TanStack/query/discussions/5800
-
 export interface IBookingDetails {
   id: number;
   createdAt: string;

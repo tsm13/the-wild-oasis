@@ -10,7 +10,6 @@ export interface LoginParams {
   password: string;
 }
 
-// REVIEW:
 export interface User {
   id?: string;
   user_metadata: UserMetadata;
@@ -22,7 +21,6 @@ export interface UserMetadata {
   avatar: string;
   fullName: string;
 }
-// ^ these two
 
 export interface IUpdateCurrentUser {
   fullName: string;
