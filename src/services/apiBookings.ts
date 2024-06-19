@@ -45,12 +45,7 @@ export async function getBookings({ filter, sortBy, page }: GetBookingsParams) {
     throw new Error("Failed to load bookings");
   }
 
-  // Sorting:
-
-  // REVIEW:
-  // return data;
   return { data, count } as any;
-  //return { data, count };
 }
 
 export async function getBooking(id: number) {
@@ -83,7 +78,6 @@ export async function getBookingsAfterDate(date: string) {
   return data;
 }
 
-// REVIEW: filter for confirmed stays?
 export async function getStaysAfterDate(date: string) {
   const { data, error } = await supabase
     .from("bookings")

@@ -21,10 +21,9 @@ function CreateCabinForm({ cabinToEdit, onCloseModal }: Props) {
   const { isUpdating, updateCabin } = useUpdateCabin();
 
   const { id: editId, ...editedValues } = cabinToEdit || {};
-  //const isEditSession = Boolean(editId);
+
   const { register, handleSubmit, reset, getValues, formState } =
     useForm<ICabinForm>({
-      // defaultValues: isEditSession ? editedValues : {},
       defaultValues: editId ? editedValues : {},
     });
   const { errors } = formState;
@@ -57,7 +56,7 @@ function CreateCabinForm({ cabinToEdit, onCloseModal }: Props) {
   };
 
   const onError = function (_errors: Object) {
-    //console.log(errors);
+    console.error(errors);
   };
 
   return (

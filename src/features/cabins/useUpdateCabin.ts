@@ -10,7 +10,7 @@ export function useUpdateCabin() {
     mutationFn: ({ cabin, id }: { cabin: ICabinForm; id: number }) =>
       updateCabinAPI(cabin, id),
     onSuccess: () => {
-      toast.success("Cabin added successfully");
+      toast.success("Cabin updated successfully");
       queryClient.invalidateQueries({
         queryKey: ["cabins"],
       });
