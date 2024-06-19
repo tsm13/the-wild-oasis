@@ -19,6 +19,10 @@
 - User creation (only by logged in users)
 - Settings: option to easily change hotel settings
 
+<img src="https://github.com/tsm13/the-wild-oasis/blob/main/public/screenshots/screenshot01.png?raw=true" alt="screenshot" width="500"/> <img src="https://github.com/tsm13/the-wild-oasis/blob/main/public/screenshots/screenshot02.png?raw=true" alt="screenshot" width="500"/>
+
+<img src="https://github.com/tsm13/the-wild-oasis/blob/main/public/screenshots/screenshot03.png?raw=true" alt="screenshot" width="500"/> <img src="https://github.com/tsm13/the-wild-oasis/blob/main/public/screenshots/screenshot04.png?raw=true" alt="screenshot" width="500"/>
+
 ## Tools and technical concepts
 
 - Compound Components: For the creation of highly reusable components such as tables and modals
@@ -35,7 +39,6 @@
 
 ### Notes
 
-Build tool: Vite
 Optimized for mobile: No.
 
 🇬🇧
