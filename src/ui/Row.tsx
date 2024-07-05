@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 interface Props {
-  type?: "horizontal" | "vertical";
+  type: "horizontal" | "vertical";
   children?: React.ReactElement | React.ReactElement[];
 }
 
