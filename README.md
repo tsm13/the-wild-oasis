@@ -22,8 +22,11 @@
 - Settings: option to easily change hotel settings
 
 ![Dashboard](/public/screenshots/01.png)
+
 ![Dashboard](/public/screenshots/02.png)
+
 ![Dashboard](/public/screenshots/03.png)
+
 ![Dashboard](/public/screenshots/04.png)
 
 ## Tools and technical concepts
@@ -34,7 +37,7 @@
 - React Hook Form
 - React Router
 - React Query
-- Recharts Lib
+- Recharts
 - Supabase
 - Styled Components
 - Typescript
