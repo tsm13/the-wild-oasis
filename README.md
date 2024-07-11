@@ -1,12 +1,14 @@
 # The Wild Oasis
 
+![Dashboard](/public/screenshots/00.png)
+
 🇬🇧 Fullstack (React + supabase) hotel management application. Project built following the design by Jonas Schmedtmann, as part of his [Ultimate React Course](https://www.udemy.com/course/the-ultimate-react-course/).
 
 🇧🇷 Projeto de gerenciamento hoteleiro fullstack (React + supabase). Parte do curso [Ultimate React Course](https://www.udemy.com/course/the-ultimate-react-course), de Jonas Schmedtmann.
 
 ## Live Demo
 
-[Here on Netlify](https://the-wild-oasis-tsm13.netlify.app)!
+[Here on Netlify](https://the-wild-oasis-tsm13.netlify.app)
 
 ## Features
 
@@ -19,20 +21,20 @@
 - User creation (only by logged in users)
 - Settings: option to easily change hotel settings
 
-<img src="https://github.com/tsm13/the-wild-oasis/blob/main/public/screenshots/screenshot01.png?raw=true" alt="screenshot" width="400"/> <img src="https://github.com/tsm13/the-wild-oasis/blob/main/public/screenshots/screenshot02.png?raw=true" alt="screenshot" width="400"/>
-
-<img src="https://github.com/tsm13/the-wild-oasis/blob/main/public/screenshots/screenshot03.png?raw=true" alt="screenshot" width="400"/> <img src="https://github.com/tsm13/the-wild-oasis/blob/main/public/screenshots/screenshot04.png?raw=true" alt="screenshot" width="400"/>
+![Dashboard](/public/screenshots/01.png)
+![Dashboard](/public/screenshots/02.png)
+![Dashboard](/public/screenshots/03.png)
+![Dashboard](/public/screenshots/04.png)
 
 ## Tools and technical concepts
 
 - Compound Components: For the creation of highly reusable components such as tables and modals
 - Custom React Hooks: For fetching data with React Query
-- Error Boundary (react-error-boundary lib)
+- Error Boundary
 - React Hook Form
 - React Router
 - React Query
-- Recharts
-- RESTful APIs
+- Recharts Lib
 - Supabase
 - Styled Components
 - Typescript
